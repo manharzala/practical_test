@@ -24,4 +24,13 @@ class RelationshipsController < ApplicationController
 			render json: { :status => "failure", :message => "No user present."}
 		end
 	end
+
+	#profile
+	def profile
+		if current_user.present?
+			tuser_followers = current_user.followers
+			tuser_followings = current_user.following
+			render json: { :status => "success", :code => 200, :message => "List of followers and followings of the user", data: { followers: tuser_followers, followings: tuser_followings }}
+		end
+	end
 end
